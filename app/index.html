@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Awesome Search Box</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" crossorigin="anonymous">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" crossorigin="anonymous">
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+</head>
+
+<body ng-app="app">
+  <div class="container h-100" ng-controller="AppController as vm">
+    <div class="d-flex justify-content-center h-100">
+
+      <form ng-submit="vm.search()">
+        <div class="form-group">
+          <div class="searchbar">
+            <input class="search_input" type="text" name="" placeholder="Search..." ng-model="vm.textsearch">
+            <button type="submit" class="search_icon">Submit</button>
+          </div>
+          <div class="form-check">
+            <input type="checkbox" class="form-check-input" value="labo" ng-model="vm.params.labo">
+            <label class="form-check-label">Laboratoire</label>
+          </div>
+          <div class="form-check">
+            <input type="checkbox" class="form-check-input" value="univ" ng-model="vm.params.univ">
+            <label class="form-check-label">Université</label>
+          </div>
+          <div class="form-check">
+            <input type="checkbox" class="form-check-input" value="coaut" ng-model="vm.params.coaut">
+            <label class="form-check-label">Co-auteurs</label>
+          </div>
+        </div>
+      </form>
+
+      <div class="row">
+        <ul class="list-group">
+          <li class="list-group-item" ng-repeat="result in vm.results">
+            <div class="mr-3" alt="Generic placeholder image"> {{result.docid}}</div>
+            <div class="media-body">
+              <h5 class="mt-0 mb-1">{{result.uri_s}}</h5>
+              {{result.label_s}}
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="./jquery/dist/jquery.min.js"></script>
+  <script type="text/javascript" src="./angular/angular.min.js"></script>
+  <script type="text/javascript" src="app/app.js"></script>
+  <script type="text/javascript" src="app/HAL.service.js"></script>
+</body>
+
+</html>

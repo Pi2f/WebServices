@@ -1,0 +1,20 @@
+{
+  "name": "webservices",
+  "version": "1.0.0",
+  "description": "Moteur de Recherche (API HAL)",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "angular": "^1.7.5",
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "jquery": "^3.3.1",
+    "method-override": "^3.0.0",
+    "morgan": "^1.9.1",
+    "nodemon": "^1.18.9"
+  }
+}
