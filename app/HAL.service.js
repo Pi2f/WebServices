@@ -5,26 +5,37 @@
     HALService.$inject = ['$http'];
 
     function HALService($http) {
-        var url = "http://api.archives-ouvertes.fr/search/";
+        var url = "http://localhost:3001";
         var service = {};
         service.search = search;
         return service;
 
-        function search(params) {
-            var type = "";
-            if(params.labo)
-                type = "labStructName_s:"+params.query+")OR(labStructAcronym_s:";
-            if(params.univ)
-            type = "structName_s:"+params.query+")OR(structAcronym_s:";
-                        
-            var request = url+"?q=("+type+params.query+")&wt="+params.format;
+        function search(params) {            
+            // var type = "";
+            if(params.labo == "labo"){
+                return  $http.get(url+"/laboratory/"+params.query)
+                .then(handleSuccess, handleError);
+            }
 
-            if(params.coaut)
-                request = request.concat("&fl=authFullName_s");
+
+            //     type = "labStructName_s:"+params.query+")OR(labStructAcronym_s:";
+            if(params.univ == "univ"){
+                return  $http.get(url+"/university/"+params.query)
+                .then(handleSuccess, handleError);
+            }
+
+            // type = "structName_s:"+params.query+")OR(structAcronym_s:";
+                        
+            // var request = url+"?q=("+type+params.query+")&wt="+params.format;
+
+            if(params.coaut == "coaut")
+                return  $http.get(url+"/author/"+params.query)
+                .then(handleSuccess, handleError);     
+                
+            return  $http.get(url+"/"+params.query)
+                .then(handleSuccess, handleError);     
 
                 
-            return  $http.get(request)
-            .then(handleSuccess, handleError);
         }
     }
 

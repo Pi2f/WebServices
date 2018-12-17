@@ -43,3 +43,9 @@ html {
     border-radius: 50%;
     color: white;
 }
+
+.btn-custom {
+    background-color: transparent;
+    outline: 0;
+    color: white;
+}

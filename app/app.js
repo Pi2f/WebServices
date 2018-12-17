@@ -26,6 +26,7 @@
     function search() {
       vm.results = [];
       vm.authors = [];
+      vm.selected = "Documents";
       vm.params.query = vm.textsearch;
       vm.params.format = "json";
       

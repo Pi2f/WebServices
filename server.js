@@ -4,6 +4,10 @@ const path = require('path');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
+const laboratory = require('./laboratory.js');
+const university = require('./university.js');
+const author = require('./author.js');
+const got = require('got');
 
 const app = express();
 
@@ -15,6 +19,41 @@ app.use(express.static(__dirname));
 app.use(express.static(path.resolve('node_modules')));
 
 app.get('/', (req, res) => res.sendFile(__dirname+'/app/index.html')); 
+
+app.get('/university/:keyword', function(req, res) {
+  got('/university/'+req.params.keyword, { 
+      baseUrl: "http://localhost:3002", 
+      json: true })
+  .then(response => res.send(response.body))
+  .catch(handleError);
+});
+
+app.get('/laboratory/:keyword', function(req, res) {
+  got('/laboratory/'+req.params.keyword, { 
+      baseUrl: "http://localhost:3003", 
+      json: true })
+  .then(response => res.send(response.body))
+  .catch(handleError);
+});
+
+app.get('/author/:keyword', function(req, res) {
+  got('/author/'+req.params.keyword, { 
+      baseUrl: "http://localhost:3004", 
+      json: true })
+  .then(response => res.send(response.body))
+  .catch(handleError);
+});
+
+app.get('/:keyword', function(req, res) {
+  got('http://api.archives-ouvertes.fr/search/?q='+req.params.keyword, {  
+      json: true })
+  .then(response => res.send(response.body))
+  .catch(handleError);
+});
+
+function handleError(error){
+  console.log('error:', error);
+}
 
 const server = http.createServer(app).listen(3001, function(){ 
   console.log(`Example app listening on port 3001!`)
