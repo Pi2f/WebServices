@@ -1,18 +1,17 @@
-(function(){
+(function () {
   angular
-  .module('app', [])
-  .config(config)
-  .run(run)
-  .controller('AppController', AppController);
+    .module('app', [])
+    .config(config)
+    .run(run)
+    .controller('AppController', AppController);
 
   function config() {
-  
+
   }
 
-  function run(){
-  }
-  
-  function AppController(HALService){
+  function run() {}
+
+  function AppController(HALService) {
     var vm = this;
     vm.search = search;
     vm.params = {
@@ -22,15 +21,34 @@
       query: "",
     }
     vm.results = [];
-    
-    function search(){
+    vm.authors = [];
+
+    function search() {
+      vm.results = [];
+      vm.authors = [];
       vm.params.query = vm.textsearch;
       vm.params.format = "json";
-        
-        console.log(vm.params);
-        HALService.search(vm.params).then(function(res){
+      
+      HALService.search(vm.params).then(function (res) {
+        if (vm.params.coaut) {
+          getCoaut(res);
+        } else {
           vm.results = res;
-        });
+        }
+      });
+
+      function getCoaut(data) {
+        data.forEach(document => {
+          document.authFullName_s.forEach(author => {
+            author = author.includes(vm.textsearch) ? null : author;
+            if (author != null) {
+              if (!vm.authors.includes(author)) {
+                vm.authors.push(author);
+              }
+            }
+          });
+        })
+      }
     }
   }
 })();

@@ -14,40 +14,44 @@
 
 <body ng-app="app">
   <div class="container h-100" ng-controller="AppController as vm">
-    <div class="d-flex justify-content-center h-100">
-
-      <form ng-submit="vm.search()">
+    <div class="mt-3 row d-flex justify-content-center h-100">
+      <form class="d-flex" ng-submit="vm.search()">
         <div class="form-group">
+          
           <div class="searchbar">
             <input class="search_input" type="text" name="" placeholder="Search..." ng-model="vm.textsearch">
-            <button type="submit" class="search_icon">Submit</button>
+            <button type="submit" class="search_icon"><i class="fas fa-search"></i></button>
           </div>
-          <div class="form-check">
-            <input type="checkbox" class="form-check-input" value="labo" ng-model="vm.params.labo">
-            <label class="form-check-label">Laboratoire</label>
-          </div>
-          <div class="form-check">
-            <input type="checkbox" class="form-check-input" value="univ" ng-model="vm.params.univ">
-            <label class="form-check-label">Université</label>
-          </div>
-          <div class="form-check">
-            <input type="checkbox" class="form-check-input" value="coaut" ng-model="vm.params.coaut">
-            <label class="form-check-label">Co-auteurs</label>
+          <div class="d-flex row justify-content-around">
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" value="labo" ng-model="vm.params.labo">
+              <label class="form-check-label">Laboratoire</label>
+            </div>
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" value="univ" ng-model="vm.params.univ">
+              <label class="form-check-label">Université</label>
+            </div>
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" value="coaut" ng-model="vm.params.coaut">
+              <label class="form-check-label">Co-auteurs</label>
+            </div>
           </div>
         </div>
       </form>
-
-      <div class="row">
-        <ul class="list-group">
+        <ul class="w-100 list-group">
           <li class="list-group-item" ng-repeat="result in vm.results">
             <div class="mr-3" alt="Generic placeholder image"> {{result.docid}}</div>
             <div class="media-body">
-              <h5 class="mt-0 mb-1">{{result.uri_s}}</h5>
+              <h5 class="mt-0 mb-1"><a href="{{result.uri_s}}">{{result.uri_s}}</a></h5>
               {{result.label_s}}
             </div>
           </li>
         </ul>
-      </div>
+        <ul class="w-100 list-group">
+            <li class="list-group-item" ng-repeat="author in vm.authors">
+              {{author}}
+            </li>
+          </ul>
     </div>
   </div>
   <script type="text/javascript" src="./jquery/dist/jquery.min.js"></script>

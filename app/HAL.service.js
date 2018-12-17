@@ -11,20 +11,24 @@
         return service;
 
         function search(params) {
-            var filter = "";
+            var type = "";
             if(params.labo)
-                filter="labStructName_t"
+                type = "labStructName_s:"+params.query+")OR(labStructAcronym_s:";
             if(params.univ)
-                filter = "structName_s"
-            
+            type = "structName_s:"+params.query+")OR(structAcronym_s:";
+                        
+            var request = url+"?q=("+type+params.query+")&wt="+params.format;
 
-            return  $http.get(url+"?q="+filter+":"+params.query+"&wt="+params.format)
-            .then(handleSuccess, handleError);    
+            if(params.coaut)
+                request = request.concat("&fl=authFullName_s");
+
+                
+            return  $http.get(request)
+            .then(handleSuccess, handleError);
         }
     }
 
     function handleSuccess(res){
-        console.log(res);
         return res.data.response.docs;
     }
 

@@ -21,16 +21,9 @@ html {
     border: 0;
     outline: 0;
     background: none;
-    width: 0;
-    caret-color: transparent;
-    line-height: 40px;
-    transition: width 0.4s linear;
-}
-
-.searchbar:hover>.search_input {
-    padding: 0 10px;
     width: 450px;
     caret-color: red;
+    line-height: 40px;
     transition: width 0.4s linear;
 }
 
@@ -40,6 +33,7 @@ html {
 }
 
 .search_icon {
+    background-color: #353b48;
     height: 40px;
     width: 40px;
     float: right;
