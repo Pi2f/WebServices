@@ -36,6 +36,12 @@
         } else {
           vm.results = res;
         }
+        vm.params = {
+          labo: false,
+          univ: false,
+          coaut: false,
+          query: "",
+        }
       });
 
       function getCoaut(data) {

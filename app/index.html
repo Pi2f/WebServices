@@ -17,14 +17,7 @@
     <div class="mt-3 row d-flex justify-content-center h-100">
       <form class="d-flex" ng-submit="vm.search()">
         <div class="form-group">
-          <div class="searchbar input-group mb-3">
-              <div class="input-group-prepend mr-3">
-                <button type="button" class="btn btn-custom dropdown-toggle" type="button" 
-                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Salut</button>
-                <div class="dropdown-menu">
-                  <a class="dropdown-item" href="#">Salute&</a>                
-                </div>
-              </div>
+          <div class="searchbar">
             <input class="search_input" type="text" name="" placeholder="Search..." ng-model="vm.textsearch">
             <button type="submit" class="search_icon"><i class="fas fa-search"></i></button>
           </div>
@@ -46,7 +39,7 @@
       </form>
         <ul class="w-100 list-group">
           <li class="list-group-item" ng-repeat="result in vm.results">
-            <div class="mr-3" alt="Generic placeholder image"> {{result.docid}}</div>
+            <div class="mr-3" alt="Generic placeholder image"> {{result.title_s[0]}}</div>
             <div class="media-body">
               <h5 class="mt-0 mb-1"><a href="{{result.uri_s}}">{{result.uri_s}}</a></h5>
               {{result.label_s}}
