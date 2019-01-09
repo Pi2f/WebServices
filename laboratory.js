@@ -4,7 +4,7 @@ const logger = require('morgan');
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
 const got = require('got');
-const dataLaboratoryLayer = require('./dataLaboratoryLayer');
+// const dataLaboratoryLayer = require('./dataLaboratoryLayer');
 
 const app = express();
 
@@ -15,11 +15,12 @@ app.use(bodyParser.json());
 app.use(express.static(__dirname));
 
 app.get('/laboratory/:keyword', function(req, res) {
-    got("http://api.archives-ouvertes.fr/search/?q=(structName_s:"+req.params.keyword+")OR(structAcronym_s:"+req.params.keyword+")&wt=json&fl=title_s,uri_s", {  
+    // got("http://api.archives-ouvertes.fr/search/?q=(structName_s:"+req.params.keyword+")OR(structAcronym_s:"+req.params.keyword+")&wt=json&fl=title_s,uri_s", {  
+    got("http://192.168.99.100:32775/solr/mongo/clustering?q=laboratories:*"+req.params.keyword+"*&wt=json", {  
         json: true })
     .then(response => {
         res.send(response.body);
-        dataLaboratoryLayer.search(response.body.response.docs,req.params.keyword);
+        // dataLaboratoryLayer.search(response.body.response.docs,req.params.keyword);
     })
     .catch(handleError);
 });
