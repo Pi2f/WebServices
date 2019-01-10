@@ -61,7 +61,7 @@ app.get('/author/:keyword', function(req, res) {
 });
 
 app.get('/:keyword', function(req, res) {
-  got('http://192.168.99.100:32775/solr/mongo/clustering?q=titles:*'+req.params.keyword+"*&wt=json", {  
+  got('http://192.168.99.100:32776/solr/mongo/clustering?q=titles:*'+req.params.keyword+"*&wt=json", {  
       json: true })
   .then(response => {
     // dataLayer.search(response.body.response.docs,req.params.keyword);
@@ -75,7 +75,7 @@ app.post('/filter', function(req, res) {
     req.body.forEach(element => {
         str += element+" ";
     });
-    got('http://192.168.99.100:32775/solr/mongo/clustering?q=id:('+str+")&wt=json", {  
+    got('http://192.168.99.100:32776/solr/mongo/clustering?q=id:('+str+")&wt=json", {  
         json: true })
     .then(response => {
         res.send(response.body);

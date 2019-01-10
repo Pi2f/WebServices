@@ -16,7 +16,7 @@ app.use(express.static(__dirname));
 
 app.get('/author/:keyword', function(req, res) {
     // got("http://api.archives-ouvertes.fr/search/?q="+req.params.keyword+"&wt=json&fl=authFullName_s", {  
-    got("http://192.168.99.100:32775/solr/mongo/clustering?q=authors:*"+req.params.keyword+"*&wt=json", {  
+    got("http://192.168.99.100:32776/solr/mongo/clustering?q=authors:*"+req.params.keyword+"*&wt=json", {  
         json: true })
     .then(response => {        
         res.send(response.body);
